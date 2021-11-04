@@ -9,15 +9,9 @@ This repository contains:
 
 #### Expectation step
 
-There are $m$ elements with missing data out of $n$ elements.
+There are **m** elements with missing data out of **n** elements.
 
-\begin{align}
-s_1 &= \sum^n_{i=m+1}x_{i,1} + \sum^m_{i=1}\big(\mu_1+\frac{\sigma_{1,2}}{\sigma_{2,2}}(x_{i,2} - \mu_2)\big)\\
-s_{1,1} &= \sum^n_{i=m+1}x_{i,1}^2 + \sum^m_{i=1}\big(\big(\mu_1+\frac{\sigma_{1,2}}{\sigma_{2,2}}(x_{i,2} - \mu_2)\big)^2 + \sigma_{1,1} - \frac{\sigma_{1,2}^2}{\sigma_{2,2}}\big)\\
-s_2 &= \sum^n_{i=m+1}x_{i,2} + \sum^m_{i=1}\big(\mu_2+\frac{\sigma_{2,1}}{\sigma_{1,1}}(x_{i,1} - \mu_1)\big)\\
-s_{2,2} &= \sum^n_{i=m+1}x_{i,2}^2 + \sum^m_{i=1}\big(\big(\mu_2+\frac{\sigma_{2,1}}{\sigma_{1,1}}(x_{i,1} - \mu_1)\big)^2 + \sigma_{2,2} - \frac{\sigma_{2,1}^2}{\sigma_{1,1}}\big)\\
-s_{1,2} &= \sum^n_{i=m+1}x_{i,1}.x_{i,2}+\sum^m_{i=1}x_{i,1}\big(\mu_2+\frac{\sigma_{2,1}}{\sigma_{1,1}}(x_{i,1}-\mu_1)\big)\\
-\end{align}
+![test](https://latex.codecogs.com/gif.latex?\begin{align}&space;s_1&space;&=&space;\sum^n_{i=m&plus;1}x_{i,1}&space;&plus;&space;\sum^m_{i=1}\big(\mu_1&plus;\frac{\sigma_{1,2}}{\sigma_{2,2}}(x_{i,2}&space;-&space;\mu_2)\big)\notag\\&space;s_{1,1}&space;&=&space;\sum^n_{i=m&plus;1}x_{i,1}^2&space;&plus;&space;\sum^m_{i=1}\big(\big(\mu_1&plus;\frac{\sigma_{1,2}}{\sigma_{2,2}}(x_{i,2}&space;-&space;\mu_2)\big)^2&space;&plus;&space;\sigma_{1,1}&space;-&space;\frac{\sigma_{1,2}^2}{\sigma_{2,2}}\big)\notag\\&space;s_2&space;&=&space;\sum^n_{i=m&plus;1}x_{i,2}&space;&plus;&space;\sum^m_{i=1}\big(\mu_2&plus;\frac{\sigma_{2,1}}{\sigma_{1,1}}(x_{i,1}&space;-&space;\mu_1)\big)\notag\\&space;s_{2,2}&space;&=&space;\sum^n_{i=m&plus;1}x_{i,2}^2&space;&plus;&space;\sum^m_{i=1}\big(\big(\mu_2&plus;\frac{\sigma_{2,1}}{\sigma_{1,1}}(x_{i,1}&space;-&space;\mu_1)\big)^2&space;&plus;&space;\sigma_{2,2}&space;-&space;\frac{\sigma_{2,1}^2}{\sigma_{1,1}}\big)\notag\\&space;s_{1,2}&space;&=&space;\sum^n_{i=m&plus;1}x_{i,1}.x_{i,2}&plus;\sum^m_{i=1}x_{i,1}\big(\mu_2&plus;\frac{\sigma_{2,1}}{\sigma_{1,1}}(x_{i,1}-\mu_1)\big)\notag&space;\end{align}" title="\begin{align} s_1 &= \sum^n_{i=m+1}x_{i,1} + \sum^m_{i=1}\big(\mu_1+\frac{\sigma_{1,2}}{\sigma_{2,2}}(x_{i,2} - \mu_2)\big)\notag\\ s_{1,1} &= \sum^n_{i=m+1}x_{i,1}^2 + \sum^m_{i=1}\big(\big(\mu_1+\frac{\sigma_{1,2}}{\sigma_{2,2}}(x_{i,2} - \mu_2)\big)^2 + \sigma_{1,1} - \frac{\sigma_{1,2}^2}{\sigma_{2,2}}\big)\notag\\ s_2 &= \sum^n_{i=m+1}x_{i,2} + \sum^m_{i=1}\big(\mu_2+\frac{\sigma_{2,1}}{\sigma_{1,1}}(x_{i,1} - \mu_1)\big)\notag\\ s_{2,2} &= \sum^n_{i=m+1}x_{i,2}^2 + \sum^m_{i=1}\big(\big(\mu_2+\frac{\sigma_{2,1}}{\sigma_{1,1}}(x_{i,1} - \mu_1)\big)^2 + \sigma_{2,2} - \frac{\sigma_{2,1}^2}{\sigma_{1,1}}\big)\notag\\ s_{1,2} &= \sum^n_{i=m+1}x_{i,1}.x_{i,2}+\sum^m_{i=1}x_{i,1}\big(\mu_2+\frac{\sigma_{2,1}}{\sigma_{1,1}}(x_{i,1}-\mu_1)\big)\notag \end{align})
 
 #### Maximization step
 
