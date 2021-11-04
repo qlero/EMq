@@ -11,10 +11,10 @@ This repository contains:
 
 There are **m** elements with missing data out of **n** elements.
 
-![Estep](images/Estep.png)
+![Estep](images/Estep.png#center)
 
 #### Maximization step
 
 We update the parameters such that:
 
-![Mstep](images/Mstep.png)
+![Mstep](images/Mstep.png#center)
