@@ -36,10 +36,6 @@ squareSumAlc : sum alc * alc
 squareSumMal : sum mal * mal
 prodAlcMal   : sum alc * mal
 
-/ Initial values
-
-init : ()
-
 / Expectation step loop
 
 s_1 : { [m1; m2; v12; v22]      m1 + (v12 % v22) * (malWithAlcNA - m2) }
