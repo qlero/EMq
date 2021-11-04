@@ -22,39 +22,47 @@ varAlc     : sqrt covariance wine[`Alcohol]
 varMal     : sqrt covariance wine[`Malic.Acid] 
 covAlcMal  : sqrt wine[`Alcohol] cov wine[`Malic.Acid]
 
-/ computes the intermediary values for the expectation step
+/ computes intermediary values for the expectation step
 
+n            : count wine
 nl           : null wineNA
 malWithAlcNA : wineNA[`Malic.Acid] where nl[`Alcohol]
 alcWithMalNA : wineNA[`Alcohol] where nl[`Malic.Acid]
 mal          : wineNA[`Malic.Acid] where all each not null wineNA[`Malic.Acid]
 alc          : wineNA[`Alcohol] where all each not null wineNA[`Alcohol]
+sumMal       : sum mal
+sumAlc       : sum alc
+squareSumAlc : sum alc * alc
+squareSumMal : sum mal * mal
+prodAlcMal   : sum alc * mal
+
+/ Initial values
+
+init : ()
 
 / Expectation step loop
 
-s_1 : { [m1; m2; v12; v22] m1 + (v12 % v22) * (malWithAlcNA - m2) }
-s_2 : { [m1; m2; v11; v12] m2 + (v12 % v11) * (alcWithMalNA - m1) }
-s1  : { [m1; m2; v12; v22] (sum alc) + (sum s_1[m1; m2; v12; v22]) }
-s11 : { [m1; m2; v11; v12; v22] a : (sum alc * alc);
-                                b : (s_1[m1; m2; v12; v22] * s_1[m1; m2; v12; v22]);
-                                c :  v11 - (v12 * v12) % v22; 
-                                a + sum b + c }
-s2  : { [m1; m2; v11; v12] (sum mal) + (sum s_2[m1; m2; v11; v12]) }
-s22 : { [m1; m2; v11; v12; v22] a : (sum mal * mal);
-                                b : (s_2[m1; m2; v11; v12] * s_2[m1; m2; v11; v12]);
-                                c : v22 - (v12 * v12) % v11; 
-                                a + sum b + c }
-s12 : { [m1; m2; v11; v12] a : (sum alc * mal); 
-                           b : (alcWithMalNA * (m2 + (v12 % v11) * (alcWithMalNA-m1))); 
-                           a + sum b }
+s_1 : { [m1; m2; v12; v22]      m1 + (v12 % v22) * (malWithAlcNA - m2) }
+s_2 : { [m1; m2; v11; v12]      m2 + (v12 % v11) * (alcWithMalNA - m1) }
+s1  : { [m1; m2; v12; v22]      sumAlc + (sum s_1[m1; m2; v12; v22]) }
+s11 : { [m1; m2; v11; v12; v22] a : (s_1[m1; m2; v12; v22] * s_1[m1; m2; v12; v22]);
+                                b :  v11 - (v12 * v12) % v22; 
+                                squareSumAlc + sum a + b }
+s2  : { [m1; m2; v11; v12]      sumMal + (sum s_2[m1; m2; v11; v12]) }
+s22 : { [m1; m2; v11; v12; v22] a : (s_2[m1; m2; v11; v12] * s_2[m1; m2; v11; v12]);
+                                b : v22 - (v12 * v12) % v11; 
+                                squareSumMal + sum a + b }
+s12 : { [m1; m2; v11; v12]      a : m2 + (v12 % v11) * (alcWithMalNA - m1);
+                                b : alcWithMalNA * a;
+                                prodAlcMal + sum b }
   
 / Maximization step loop
 
-m1Up  : { [m1; m2; v12; v22] s1[m1; m2; v12; v22] % (count wine) }
-m2Up  : { [m1; m2; v11; v12] s2[m1; m2; v11; v12] % (count wine) }
-v11Up : { [m1; m2; v11; v12; v22] (s11[m1; m2; v11; v12; v22] % count wine) - (m1 * m1) }
-v22Up : { [m1; m2; v11; v12; v22] (s22[m1; m2; v11; v12; v22] % count wine) - (m2 * m2) }
-v12Up : { [m1; m2; v11; v12; v22] (s12[m1; m2; v11; v12] % count wine) - (m1 * m2) }
+m1Up  : { [m1; m2; v12; v22]      s1[m1; m2; v12; v22] % n }
+m2Up  : { [m1; m2; v11; v12]      s2[m1; m2; v11; v12] % n }
+v11Up : { [m1; m2; v11; v12; v22] (s11[m1; m2; v11; v12; v22] % n) - (m1 * m1) }
+v22Up : { [m1; m2; v11; v12; v22] (s22[m1; m2; v11; v12; v22] % n) - (m2 * m2) }
+v12Up : { [m1; m2; v11; v12; v22] (s12[m1; m2; v11; v12] % n) - (m1 * m2) }
 
 / EM algorithm
 
@@ -67,5 +75,5 @@ EM : { [m1; m2; v11; v12; v22] nm1  : m1Up[m1; m2; v12; v22];
 
 / Running the algorithm: 1 and 3 rounds of EM
 
-EM [mean[`Alcohol]; mean[`Malic.Acid]; varAlc; covAlcMal; varMal]
-EM . EM . EM [mean[`Alcohol]; mean[`Malic.Acid]; varAlc; covAlcMal; varMal]
+EM      [mean[`Alcohol]; mean[`Malic.Acid]; varAlc; covAlcMal; varMal]
+EM . EM [mean[`Alcohol]; mean[`Malic.Acid]; varAlc; covAlcMal; varMal]
