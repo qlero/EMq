@@ -42,7 +42,7 @@ s_1 : { [m1; m2; v12; v22]      m1 + (v12 % v22) * (malWithAlcNA - m2) }
 s_2 : { [m1; m2; v11; v12]      m2 + (v12 % v11) * (alcWithMalNA - m1) }
 s1  : { [m1; m2; v12; v22]      sumAlc + (sum s_1[m1; m2; v12; v22]) }
 s11 : { [m1; m2; v11; v12; v22] a : (s_1[m1; m2; v12; v22] * s_1[m1; m2; v12; v22]);
-                                b :  v11 - (v12 * v12) % v22; 
+                                b : v11 - (v12 * v12) % v22; 
                                 squareSumAlc + sum a + b }
 s2  : { [m1; m2; v11; v12]      sumMal + (sum s_2[m1; m2; v11; v12]) }
 s22 : { [m1; m2; v11; v12; v22] a : (s_2[m1; m2; v11; v12] * s_2[m1; m2; v11; v12]);
@@ -66,7 +66,7 @@ EM : { [m1; m2; v11; v12; v22] nm1  : m1Up[m1; m2; v12; v22];
                                nm2  : m2Up[m1; m2; v11; v12]; 
                                nv11 : v11Up[m1; m2; v11; v12; v22]; 
                                nv12 : v12Up[m1; m2; v11; v12; v22]; 
-                               nv22: v22Up[m1; m2; v11; v12; v22]; 
+                               nv22 : v22Up[m1; m2; v11; v12; v22]; 
                                (nm1, nm2, nv11, nv12, nv22) }
 
 / Running the algorithm: 1 and 3 rounds of EM
